@@ -41,8 +41,8 @@ var FluxMailApp = React.createClass({
         <div className="fluxMailApp">
           <FolderList folders={this.state.folders}></FolderList>
           <div className="wrapper">
+            <MailDetail mail={this.state.selectedMail}/>
             <MailList mails={this.state.mails}></MailList>
-            <MailDetail/>
           </div>
         </div>
   	);

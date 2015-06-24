@@ -8,6 +8,11 @@ var FluxProduct = React.createClass({
     FluxCartActions.deleteMail(this.props.mail);
   },
 
+  selectMail: function(event){
+    FluxCartActions.selectMail(this.props.mail);
+  },
+
+
   moveMail: function(event){
     var newFolder = window.prompt("Verschiebe Mail in Ordner",this.props.mail.folder);
     FluxCartActions.moveMail(this.props.mail, newFolder);
@@ -15,12 +20,11 @@ var FluxProduct = React.createClass({
 
   render: function () {
     return (
-        <div className="mail">
-          <button className="roundButton" onclick="this.deleteMail()">X</button>
-          <button className="roundButton" onclick="this.moveMail()">E</button>
+        <div className="mail" onClick={this.selectMail}>
+          <button className="roundButton" onClick={this.deleteMail}>X</button>
+          <button className="roundButton" onClick={this.moveMail}>E</button>
           <h2 className="mailSubject">{this.props.mail.subject}</h2>
           <p>{this.props.mail.sender}</p>
-
         </div>
     );
   }

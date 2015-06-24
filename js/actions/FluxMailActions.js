@@ -40,14 +40,14 @@ var FluxCartActions = {
   addMail: function(mail) {
     AppDispatcher.handleAction({
       actionType: FluxCartConstants.MAIL_ADD,
-      update: mail
+      data: mail
     })
   },
   // Add item to cart
   deleteMail: function(mail) {
     AppDispatcher.handleAction({
       actionType: FluxCartConstants.MAIL_REMOVE,
-      update: mail
+      data: mail
     })
   },
 
@@ -61,7 +61,7 @@ var FluxCartActions = {
 
   selectMail: function(mail) {
     AppDispatcher.handleAction({
-      actionType: FluxCartConstants.MAIL_MOVE,
+      actionType: FluxCartConstants.SET_SELECTED_MAIL,
       data: mail
     })
   },
