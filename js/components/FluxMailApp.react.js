@@ -54,5 +54,4 @@ var FluxMailApp = React.createClass({
   }
 
 });
-
 module.exports = FluxMailApp;

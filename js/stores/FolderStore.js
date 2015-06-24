@@ -10,7 +10,7 @@ var _folders=[], _selected = null;
 function loadFolderData() {
   console.log("Ordner lade..");
   $.ajax({
-    url: 'http://192.168.178.24:8080/api/folder/',
+    url: 'http://localhost:8080/api/folder/',
     dataType: 'json',
     cache: false,
     success: function (data) {
@@ -31,7 +31,7 @@ function setSelected(folder) {
 
 function renameFolder(folder, newName) {
   $.ajax({
-    url: 'http://192.168.178.24:8080/api/folder/'+folder,
+    url: 'http://localhost:8080/api/folder/'+folder,
     dataType: 'json',
     cache: false,
     type: 'put',
@@ -49,7 +49,7 @@ function renameFolder(folder, newName) {
 
 function deleteFolder(folder) {
   $.ajax({
-    url: 'http://192.168.178.24:8080/api/folder/'+folder,
+    url: 'http://localhost:8080/api/folder/'+folder,
     dataType: 'json',
     cache: false,
     type: 'delete',

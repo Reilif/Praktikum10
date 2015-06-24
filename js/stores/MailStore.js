@@ -10,12 +10,13 @@ var _mails = [], _selected = {};
 function loadMails(data) {
   console.log("Mails laden "+data);
   $.ajax({
-    url: 'http://192.168.178.24:8080/api/folder/'+data,
+    url: 'http://localhost:8080/api/folder/'+data,
     dataType: 'json',
     cache: false,
     success: function (data) {
       console.log("Mails geladen");
       _mails = data;
+      _selected = {};
       MailStore.emitChange();
     }.bind(this),
     error: function (xhr, status, err) {
@@ -27,7 +28,7 @@ function loadMails(data) {
 function selectMail(data) {
   console.log("Mail laden "+data._id);
   $.ajax({
-    url: 'http://192.168.178.24:8080/api/msg/'+data._id,
+    url: 'http://localhost:8080/api/msg/'+data._id,
     dataType: 'json',
     cache: false,
     success: function (data) {
@@ -45,14 +46,13 @@ function selectMail(data) {
 function deleteMail(mail) {
   console.log("Mail löschen "+mail);
   $.ajax({
-    url: 'http://192.168.178.24:8080/api/msg/'+mail._id,
+    url: 'http://localhost:8080/api/msg/'+mail._id,
     dataType: 'json',
     type:'delete',
     cache: false,
     success: function (data) {
       console.log("Mail gelöscht");
-      _mails = data;
-      loadMails(mail.folder);
+      loadMails(data.folder);
     }.bind(this),
     error: function (xhr, status, err) {
       console.error(this.props.url, status, err.toString());
@@ -64,7 +64,7 @@ function deleteMail(mail) {
 function moveMail(mail, newFolder) {
   console.log("Mail move "+mail);
   $.ajax({
-    url: 'http://192.168.178.24:8080/api/msg/'+mail._id,
+    url: 'http://localhost:8080/api/msg/'+mail._id,
     dataType: 'json',
     type:'put',
     data:{folder: newFolder},
@@ -88,7 +88,7 @@ function addMail(mail) {
   var paras = {sender: mail.sender, recipients: recipients, text: mail.text,subject: mail.subject,date: mail.date, folder:mail.folder};
   console.log(paras);
   $.ajax({
-    url: 'http://192.168.178.24:8080/api/msg/'+mail._id,
+    url: 'http://localhost:8080/api/msg/',
     dataType: 'json',
     type:'post',
     data: paras,
@@ -158,7 +158,7 @@ AppDispatcher.register(function(payload) {
 
     // Respond to MAIL_ADD action
     case FluxMailConstants.MAIL_ADD:
-      deleteMail(action.data);
+      addMail(action.data);
       break;
 
     case FluxMailConstants.SET_SELECTED_MAIL:
